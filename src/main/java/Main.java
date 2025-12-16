@@ -59,11 +59,37 @@ public class Main {
     }
 
     private static void mostrarMonedaFiltrada(Moneda moneda) {
-        System.out.println("Nombre: " + moneda.getNombre());
-        System.out.println("Simbolo: " + moneda.getSimbolo());
-        System.out.println("Valor en Dólares: " + moneda.getValorEnDolares());
-        System.out.println("Rank: " + moneda.getRank());
-        System.out.println("Cambio en 24h: " + moneda.getChange24h());
+
+        //soy el rey del codigo limpio
+
+        double varianza = Double.parseDouble(moneda.getChange24h());
+
+        String signo = varianza > 0 ? "+" : (varianza < 0 ? "-" : "");
+
+        //codigos para colorines chachis
+
+        final String ANSI_REINICIO = "\u001B[0m";
+        final String ANSI_VERDE = "\u001B[32m";
+        final String ANSI_ROJO = "\u001B[31m";
+
+        //lógica para elegir el color según la variación de la cripto
+
+        String color = (varianza == 0.0) ?  ANSI_REINICIO : (varianza >= 0 ? ANSI_VERDE : ANSI_ROJO);
+
+        //Formato de salida por consola
+
+        System.out.println("================================================");
+        System.out.println("Moneda: " + moneda.getNombre() + " - " + moneda.getSimbolo());
+        System.out.println("Precio (USD): $ " + moneda.getValorEnDolares());
+        System.out.println("Ranking: # " + moneda.getRank());
+        System.out.print("Variación en 24h: " + color);
+        if (varianza != 0.0) {
+            System.out.print(signo + Math.abs(varianza) + " %");
+        } else {
+            System.out.println("N/D");
+        }
+        System.out.println(ANSI_REINICIO);
+        System.out.println("================================================");
     }
 
 }
