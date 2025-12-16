@@ -43,8 +43,10 @@ public class Main {
             Gson gson = new Gson();
             MonedaResponse monedaResponse = gson.fromJson(respuesta.body(), MonedaResponse.class);
 
+            //System.out.println(respuesta.body());
+
             Optional<Moneda> monedaFiltrada = Arrays.stream(monedaResponse.getData())
-                    .filter(m -> m.getNombre().toUpperCase().contains(nombre) || m.getSimbolo().toUpperCase().contains(nombre))
+                    .filter(m -> (m.getNombre() != null && m.getNombre().toLowerCase().contains(nombre)) ||  (m.getNombre() != null && m.getSimbolo().toLowerCase().contains(nombre)))
                     .findFirst();
             if (monedaFiltrada.isPresent()) {
                 mostrarMonedaFiltrada(monedaFiltrada.get());

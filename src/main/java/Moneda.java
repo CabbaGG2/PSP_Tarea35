@@ -1,19 +1,21 @@
+import com.google.gson.annotations.SerializedName;
+
 public class Moneda {
 
+    @SerializedName("name")
     private String nombre;
+
+    @SerializedName("symbol")
     private String simbolo;
+
+    @SerializedName("price_usd")
     private double valorEnDolares;
 
+    @SerializedName("rank")
     private int rank;
-    private String change24h;
 
-    public Moneda(String nombre, String simbolo, double valorEnDolares, int rank, String change24h) {
-        this.nombre = nombre;
-        this.simbolo = simbolo;
-        this.valorEnDolares = valorEnDolares;
-        this.rank = rank;
-        this.change24h = change24h;
-    }
+    @SerializedName("percent_change_24h")
+    private String change24h;
 
     public String getNombre() {
         return nombre;
