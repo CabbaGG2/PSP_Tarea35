@@ -15,17 +15,31 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese el nombre de la criptomoneda o simbolo:");
-        String nombre = sc.nextLine().trim().toLowerCase();
 
         try {
-            obtenerMonedas(nombre);
+            while (true) {
+                System.out.println("Ingrese el nombre de la criptomoneda o simbolo (o escriba 'salir'):");
+                String nombre = sc.nextLine().trim().toLowerCase();
+
+                if (nombre.equals("salir")) {
+                    System.out.println("Programa finalizado.");
+                    break;
+                }
+
+                if (nombre.isEmpty()) {
+                    System.out.println("Entrada vacía. Intente nuevamente.");
+                    continue;
+                }
+
+                obtenerMonedas(nombre);
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
             sc.close();
         }
     }
+
 
     private static final String API_URL = "https://api.coinlore.net/api/tickers/";
 
